@@ -49,6 +49,7 @@ export class BookService {
       if (error instanceof NotFoundException) {
         throw error
       }
+      this.logger.error(error)
       throw new InternalServerErrorException('서버에서 책을 가져오는 중 오류가 발생했습니다.')
     }
   }
