@@ -24,7 +24,8 @@ export class BookService {
         },
         relations: ['book_category'],
         skip: (page - 1) * limit,
-        take: limit
+        take: limit,
+        order: { created_at: 'desc' }
       })
     } catch (error) {
       this.logger.error(error)
