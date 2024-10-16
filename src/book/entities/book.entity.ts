@@ -7,8 +7,8 @@ import {
   OneToOne,
   JoinColumn
 } from 'typeorm'
-import { BookCategory } from './book-category.entity'
 import { ApiProperty } from '@nestjs/swagger'
+import { BookCategory } from './book-category.entity'
 
 @Entity('book')
 export class Book {

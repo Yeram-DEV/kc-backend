@@ -2,7 +2,7 @@ import { IsOptional, IsString, IsInt, Min } from 'class-validator'
 import { Type } from 'class-transformer'
 import { ApiPropertyOptional } from '@nestjs/swagger'
 
-export class FindBooksDto {
+export class QueryBooksDto {
   @ApiPropertyOptional({ description: '저자명으로 검색합니다.' })
   @IsOptional()
   @IsString()

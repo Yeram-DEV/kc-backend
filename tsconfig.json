@@ -16,6 +16,35 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@auth/*": [
+        "src/auth/*"
+      ],
+      "@book/*": [
+        "src/book/*"
+      ],
+      "@community/*": [
+        "src/community/*"
+      ],
+      "@rental/*": [
+        "src/rental/*"
+      ],
+      "@return/*": [
+        "src/return/*"
+      ],
+      "@waitlist/*": [
+        "src/waitlist/*"
+      ],
+      "@purchase/*": [
+        "src/purchase/*"
+      ],
+      "@review/*": [
+        "src/review/*"
+      ],
+      "@user/*": [
+        "src/user/*"
+      ]
+    }
   }
 }

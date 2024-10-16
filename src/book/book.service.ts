@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Book } from './entities/book.entity'
 import { Like, Repository } from 'typeorm'
-import { FindBooksDto } from './dto/find-books.dto'
+import { QueryBooksDto } from '@book/dto'
+import { Book } from '@book/entities'
 
 @Injectable()
 export class BookService {
@@ -13,9 +13,16 @@ export class BookService {
     private readonly bookRepository: Repository<Book>
   ) {}
 
-  async findAll({ page, limit, book_name, book_author, book_publisher, ...filters }: FindBooksDto): Promise<Book[]> {
+  async findAll({
+    page,
+    limit,
+    book_name,
+    book_author,
+    book_publisher,
+    ...filters
+  }: QueryBooksDto): Promise<Book[] | null> {
     try {
-      return this.bookRepository.find({
+      return await this.bookRepository.find({
         where: {
           ...filters,
           ...(book_name && { book_name: Like(`%${book_name}%`) }),
@@ -39,11 +46,9 @@ export class BookService {
         where: { book_id },
         relations: ['book_category']
       })
-
       if (!book) {
         throw new NotFoundException(`ID ${book_id}에 해당하는 책을 찾을 수 없습니다.`)
       }
-
       return book
     } catch (error) {
       if (error instanceof NotFoundException) {

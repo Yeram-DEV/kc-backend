@@ -1,8 +1,8 @@
 import { Controller, Get, Param, Query, Version } from '@nestjs/common'
-import { BookService } from './book.service'
-import { FindBooksDto } from './dto/find-books.dto'
 import { ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
-import { Book } from './entities/book.entity'
+import { BookService } from '@book/book.service'
+import { Book } from '@book/entities'
+import { QueryBooksDto } from '@book/dto'
 
 @ApiTags('book')
 @ApiSecurity('x-api-key')
@@ -12,20 +12,20 @@ export class BookController {
 
   @Version('1')
   @Get()
-  @ApiOperation({ summary: '모든 책 조회' })
+  @ApiOperation({ summary: '다건 책 조회' })
   @ApiResponse({
     status: 200,
     description: '성공적으로 책 목록을 조회했습니다.',
     type: Book,
     isArray: true
   })
-  findAll(@Query() query: FindBooksDto) {
+  findAll(@Query() query: QueryBooksDto) {
     return this.bookService.findAll(query)
   }
 
   @Version('1')
   @Get(':id')
-  @ApiOperation({ summary: '단일 책 조회' })
+  @ApiOperation({ summary: '단건 책 조회' })
   @ApiResponse({
     status: 200,
     description: '성공적으로 책을 조회했습니다.',
