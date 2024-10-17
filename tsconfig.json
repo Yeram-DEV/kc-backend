@@ -4,6 +4,7 @@
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
@@ -30,20 +31,14 @@
       "@rental/*": [
         "src/rental/*"
       ],
-      "@return/*": [
-        "src/return/*"
-      ],
-      "@waitlist/*": [
-        "src/waitlist/*"
-      ],
-      "@purchase/*": [
-        "src/purchase/*"
-      ],
-      "@review/*": [
-        "src/review/*"
+      "@wait/*": [
+        "src/wait/*"
       ],
       "@user/*": [
         "src/user/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
       ]
     }
   }
