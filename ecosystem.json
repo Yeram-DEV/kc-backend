@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "nestjs-app",
+      "name": "knowledge-backend",
       "script": "dist/main.js",
       "interpreter": "~/.bun/bin/bun",
       "instances": 3,
