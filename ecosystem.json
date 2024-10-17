@@ -3,7 +3,7 @@
     {
       "name": "knowledge-backend",
       "script": "dist/main.js",
-      "interpreter": "~/.bun/bin/bun",
+      "interpreter": "/home/yeram/.bun/bin/bun",
       "instances": 3,
       "exec_mode": "cluster",
       "watch": true
