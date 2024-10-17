@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException, Logger, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Like, Repository } from 'typeorm'
-import { QueryEventsDto, QueryNoticesDto } from '@community/dto'
-import { Event, Notice } from '@community/entities'
+import { CreateReviewDto, QueryEventsDto, QueryNoticesDto, QueryReviewsDto } from '@community/dto'
+import { Event, Notice, Review } from '@community/entities'
 
 @Injectable()
 export class CommunityService {
@@ -12,7 +12,9 @@ export class CommunityService {
     @InjectRepository(Event)
     private readonly eventRepository: Repository<Event>,
     @InjectRepository(Notice)
-    private readonly noticeRepository: Repository<Notice>
+    private readonly noticeRepository: Repository<Notice>,
+    @InjectRepository(Review)
+    private readonly reviewRepository: Repository<Review>
   ) {}
 
   async findEventAll({ page, limit, search_text }: QueryEventsDto): Promise<Event[] | null> {
@@ -83,6 +85,36 @@ export class CommunityService {
       if (error instanceof NotFoundException) {
         throw error
       }
+      this.logger.error(error)
+      throw new InternalServerErrorException('서버에서 공지사항을 가져오는 중 오류가 발생하였습니다')
+    }
+  }
+
+  async createReview(createReviewDto: CreateReviewDto): Promise<Review> {
+    try {
+      const review = this.reviewRepository.create({
+        ...createReviewDto
+      })
+
+      return await this.reviewRepository.save(review)
+    } catch (error) {
+      this.logger.error(error)
+      throw new InternalServerErrorException('리뷰작성 중 오류가 발생했습니다.')
+    }
+  }
+
+  async findReviewAll({ book_id, user_id, page, limit }: QueryReviewsDto): Promise<Review[] | null> {
+    try {
+      return await this.reviewRepository.find({
+        where: {
+          ...(book_id && { book_id }),
+          ...(user_id && { user_id })
+        },
+        skip: (page - 1) * limit,
+        take: limit,
+        order: { created_at: 'desc' }
+      })
+    } catch (error) {
       this.logger.error(error)
       throw new InternalServerErrorException('서버에서 공지사항을 가져오는 중 오류가 발생하였습니다')
     }

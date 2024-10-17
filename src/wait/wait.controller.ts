@@ -13,7 +13,7 @@ export class WaitController {
   @ApiOperation({ summary: '대기자를 생성합니다.' })
   @Version('1')
   @Post()
-  async create(@Body() createWaitDto: CreateWaitDto) {
+  async createWait(@Body() createWaitDto: CreateWaitDto) {
     return await this.waitService.create(createWaitDto)
   }
 
@@ -26,14 +26,14 @@ export class WaitController {
   })
   @Version('1')
   @Get()
-  async findAll(@Query() query: QueryWaitDto) {
+  async findWaitAll(@Query() query: QueryWaitDto) {
     return await this.waitService.findAll(query)
   }
 
   @ApiOperation({ summary: '대기자를 삭제(취소)합니다' })
   @Version('1')
   @Delete(':wait_id')
-  async remove(@Param('wait_id') wait_id: string) {
+  async removeWait(@Param('wait_id') wait_id: string) {
     return await this.waitService.remove(wait_id)
   }
 }

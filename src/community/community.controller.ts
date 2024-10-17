@@ -1,8 +1,8 @@
-import { Controller, Get, Param, Query, Version } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query, Version } from '@nestjs/common'
 import { ApiOperation, ApiResponse, ApiSecurity, ApiTags } from '@nestjs/swagger'
 import { CommunityService } from '@community/community.service'
-import { QueryEventsDto, QueryNoticesDto } from '@community/dto'
-import { Event, Notice } from '@community/entities'
+import { CreateReviewDto, QueryEventsDto, QueryNoticesDto, QueryReviewsDto } from '@community/dto'
+import { Event, Notice, Review } from '@community/entities'
 
 @ApiTags('커뮤니티')
 @ApiSecurity('x-api-key')
@@ -58,5 +58,25 @@ export class CommunityController {
   @Get('notice/:notice_id')
   async findNoticeOne(@Param('notice_id') notice_id: string) {
     return await this.communityService.findNoticeOne(notice_id)
+  }
+
+  @ApiOperation({ summary: '리뷰 작성' })
+  @Version('1')
+  @Post('review')
+  async createReview(@Body() createReviewDto: CreateReviewDto) {
+    return await this.communityService.createReview(createReviewDto)
+  }
+
+  @ApiOperation({ summary: '다건 리뷰 조회' })
+  @ApiResponse({
+    status: 200,
+    description: '성공적으로 리뷰리스트를 조회했습니다.',
+    type: Review,
+    isArray: true
+  })
+  @Version('1')
+  @Get('review')
+  async findReviewAll(@Query() query: QueryReviewsDto) {
+    return await this.communityService.findReviewAll(query)
   }
 }
