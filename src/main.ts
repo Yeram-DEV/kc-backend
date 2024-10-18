@@ -45,7 +45,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config)
   SwaggerModule.setup('api', app, document, {
     swaggerUiEnabled: true,
-    customSiteTitle: '지식센터 API 문서',
+    customSiteTitle: '지식센터 API',
     swaggerOptions: {
       filter: true
     }
