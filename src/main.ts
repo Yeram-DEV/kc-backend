@@ -43,7 +43,13 @@ async function bootstrap() {
     .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'x-api-key')
     .build()
   const document = SwaggerModule.createDocument(app, config)
-  SwaggerModule.setup('api', app, document)
+  SwaggerModule.setup('api', app, document, {
+    swaggerUiEnabled: true,
+    customSiteTitle: '지식센터 API 문서',
+    swaggerOptions: {
+      filter: true
+    }
+  })
   await app.listen(4010)
 }
 
