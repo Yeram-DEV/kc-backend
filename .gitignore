@@ -2,6 +2,10 @@
 /dist
 /node_modules
 /build
+/deploy
+/old-deploy
+
+deploy.sh
 
 # Logs
 logs
