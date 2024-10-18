@@ -45,7 +45,7 @@ jobs:
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           source: "build.tar.gz"
           target: "/home/yeram/kc-backend"
