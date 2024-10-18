@@ -5,6 +5,8 @@
 /deploy
 /old-deploy
 
+deploy.sh
+
 # Logs
 logs
 *.log
