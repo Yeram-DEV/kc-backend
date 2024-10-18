@@ -58,10 +58,10 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/yeram/kc-backend                      # 프로젝트 디렉토리로 이동
-            tar -xzf build.tar.gz                          # build.tar.gz 압축 해제
-            if [ -d "dist" ]; then                         # dist 폴더가 존재하면
-              mv dist old-dist                             # 기존 dist를 old-dist로 변경
+            cd /home/yeram/kc-backend                  
+            tar -xzf build.tar.gz                  
+            if [ -d "dist" ]; then                     
+              mv dist old-dist                     
             fi
-            mv build dist                                  # build를 dist로 변경
-            pm2 reload ecosystem.json                      # PM2로 애플리케이션 재시작
+            mv build dist                             
+            pm2 reload ecosystem.json               
